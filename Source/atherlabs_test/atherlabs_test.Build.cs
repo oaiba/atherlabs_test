@@ -8,7 +8,8 @@ public class atherlabs_test : ModuleRules
 	{
 		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-		// PublicDependencyModuleNames.AddRange(new string[] { "atherlabs_test" });
+		PublicIncludePaths.AddRange(new string[] { "atherlabs_test" });
+		
 		PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore" });
 		PublicDependencyModuleNames.AddRange(new string[]
 		{
