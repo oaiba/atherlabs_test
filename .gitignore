@@ -1,3 +1,9 @@
+# JetBrains Rider & CLion
+.idea/
+.Rider/
+*.sln.DotSettings
+*.csproj.DotSettings
+
 # Visual Studio 2015 user specific files
 .vs/
 
