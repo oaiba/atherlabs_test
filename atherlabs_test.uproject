@@ -3,6 +3,16 @@
 	"EngineAssociation": "5.6",
 	"Category": "Samples",
 	"Description": "",
+	"Modules": [
+		{
+			"Name": "atherlabs_test",
+			"Type": "Runtime",
+			"LoadingPhase": "Default",
+			"AdditionalDependencies": [
+				"GameplayAbilities"
+			]
+		}
+	],
 	"Plugins": [
 		{
 			"Name": "ModelingToolsEditorMode",
@@ -53,6 +63,14 @@
 		},
 		{
 			"Name": "NetworkPrediction",
+			"Enabled": true
+		},
+		{
+			"Name": "TargetingSystem",
+			"Enabled": true
+		},
+		{
+			"Name": "GameplayAbilities",
 			"Enabled": true
 		}
 	],
