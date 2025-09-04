@@ -31,4 +31,7 @@ public:
 	UFUNCTION(BlueprintCallable, Category="Hero ASC")
 	void ShowAbilityHUD();
 
+	// Add hero-specific logic here, e.g., binding to player input
+	void BindAbilitiesToInput(const UInputComponent* InputComponent);
+
 };

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
+#include "BaseLogic/AttributeSet/BaseCharAttributeSet.h"
 #include "BaseLogic/Components/BaseAbilitySystemComponent.h"
 #include "GameFramework/Character.h"
 #include "BaseCharacter.generated.h"
@@ -18,7 +19,7 @@ public:
 	ABaseCharacter(const FObjectInitializer& ObjectInitializer);
 
 	// IAbilitySystemInterface
-	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override { return AbilitySystemComponent;}
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override { return AbilitySystemComponent; }
 
 protected:
 	// Called when the game starts or when spawned
@@ -31,13 +32,36 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// A function to initialize all default abilities
 	virtual void InitializeAbilities();
+
+	// A function to initialize default attributes
+	virtual void InitializeAttributes();
+
 protected:
-
+	// The core Ability System Component
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
-	UBaseAbilitySystemComponent* AbilitySystemComponent;
+	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
 
-	// AttributeSet base
-	UPROPERTY()
-	const UAttributeSet* AttributeSetBase;
+	// The Attribute Set to hold our attributes
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
+	TObjectPtr<UBaseCharAttributeSet> AttributeSet;
+
+	// Default abilities to grant on spawn
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
+	TArray<TSubclassOf<UGameplayEffect>> DefaultGameplayEffects;
+
+	// Default abilities to grant on spawn
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
+
+	// Handle to store abilities after being granted
+	TArray<FGameplayAbilitySpecHandle> DefaultAbilityHandles;
+
+protected:
+	virtual void PossessedBy(AController* NewController) override;
+
+	virtual void OnRep_PlayerState() override;
+
+	void GrantAbilities();
 };

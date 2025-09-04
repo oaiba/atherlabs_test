@@ -43,3 +43,25 @@ void UHeroAbilitySysComp::InitAbilityActorInfo(AActor* InOwnerActor, AActor* InA
 void UHeroAbilitySysComp::ShowAbilityHUD()
 {
 }
+
+void UHeroAbilitySysComp::BindAbilitiesToInput(const UInputComponent* InputComponent)
+{
+	if (!InputComponent)
+	{
+		UE_LOG(LogTemp, Warning, TEXT("[UHeroAbilitySystemComponent::BindAbilitiesToInput] - InputComponent is not valid."));
+		return;
+	}
+    
+	// Loop through all abilities and bind them to input.
+	// This is a simplified example, you'd likely use tags or a dedicated input system.
+	for (FGameplayAbilitySpec& Spec : ActivatableAbilities.Items)
+	{
+		if (Spec.Ability)
+		{
+			// Assuming you have an input mapping system that provides FInputAction.
+			// This is a simplified example, you'd likely use tags or a dedicated input system.
+			// Example: Bind to a specific action, e.g., "Attack"
+			// InputComponent->BindAction("Attack", ETriggerEvent::Triggered, Spec.Ability, &UGameplayAbility::ActivateAbility);
+		}
+	}
+}
