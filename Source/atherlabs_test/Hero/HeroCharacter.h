@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "InputAction.h"
+#include "InputMappingContext.h"
 #include "BaseLogic/Characters/BaseCharacter.h"
 #include "HeroCharacter.generated.h"
 
@@ -29,11 +31,24 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
+	
+	// Input Actions for abilities
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> PrimaryAttackAction;
+    
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
+	TObjectPtr<UInputAction> DodgeAction;
 
 	// This will handle ability input
 	UPROPERTY(EditDefaultsOnly, Category = "Hero")
-	TObjectPtr<class UInputMappingContext> HeroInputMappingContext;
+	TObjectPtr<UInputMappingContext> HeroInputMappingContext;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	TMap<class UInputAction*, FGameplayTag> InputTagMap;
+    TMap<TObjectPtr<UInputAction>, FGameplayTag> InputActionTags;
+
+	// Functions to handle input actions
+	void OnPrimaryAttackStarted(const FInputActionValue& Value);
+	void OnPrimaryAttackCompleted(const FInputActionValue& Value);
+	void OnDodgeStarted(const FInputActionValue& Value);
+    
 };
