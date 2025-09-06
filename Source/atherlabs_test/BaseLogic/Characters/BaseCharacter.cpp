@@ -97,13 +97,13 @@ void ABaseCharacter::OnRep_PlayerState()
 {
 	Super::OnRep_PlayerState();
 
-	// For clients, we need to initialize the ASC when the PlayerState is replicated.
-	if (AbilitySystemComponent)
-	{
-		AbilitySystemComponent->InitAbilityActorInfo(this, this);
-		InitializeAbilities();
-		InitializeAttributes();
-	}
+	// // For clients, we need to initialize the ASC when the PlayerState is replicated.
+	// if (AbilitySystemComponent)
+	// {
+	// 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	// 	InitializeAbilities();
+	// 	InitializeAttributes();
+	// }
 }
 
 void ABaseCharacter::GrantAbilities()

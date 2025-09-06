@@ -15,17 +15,17 @@ AHeroCharacter::AHeroCharacter(const FObjectInitializer& ObjectInitializer)
 	PrimaryActorTick.bCanEverTick = true;
 }
 
-void AHeroCharacter::PossessedBy(AController* NewController)
-{
-	Super::PossessedBy(NewController);
-
-	if (APlayerState* PS = GetPlayerState())
-	{
-		AbilitySystemComponent->InitAbilityActorInfo(PS, this);
-		InitializeAbilities();
-		InitializeAttributes();
-	}
-}
+// void AHeroCharacter::PossessedBy(AController* NewController)
+// {
+// 	Super::PossessedBy(NewController);
+//
+// 	if (APlayerState* PS = GetPlayerState())
+// 	{
+// 		AbilitySystemComponent->InitAbilityActorInfo(PS, this);
+// 		InitializeAbilities();
+// 		InitializeAttributes();
+// 	}
+// }
 
 void AHeroCharacter::BeginPlay()
 {
@@ -39,14 +39,17 @@ void AHeroCharacter::Tick(float DeltaTime)
 
 void AHeroCharacter::ActivateAbilityByTag(const FInputActionValue& InputActionValue, const FGameplayTag GameplayTag)
 {
-	UE_LOG(LogTemp, Warning, TEXT("[%s::%hs] - Activating Ability: InputValue=%s, GameplayTag=%s"),
-	       *GetName(), __FUNCTION__, *InputActionValue.ToString(), *GameplayTag.ToString());
-
-	FGameplayTagContainer TagContainer;
-	TagContainer.AddTag(GameplayTag);
-	if (AbilitySystemComponent)
+	if (InputActionValue.Get<float>() > 0.0f)
 	{
-		AbilitySystemComponent->TryActivateAbilitiesByTag(TagContainer);
+		UE_LOG(LogTemp, Warning, TEXT("[%s::%hs] - Activating Ability: InputValue=%s, GameplayTag=%s"),
+			   *GetName(), __FUNCTION__, *InputActionValue.ToString(), *GameplayTag.ToString());
+
+		FGameplayTagContainer TagContainer;
+		TagContainer.AddTag(GameplayTag);
+		if (AbilitySystemComponent)
+		{
+			AbilitySystemComponent->TryActivateAbilitiesByTag(TagContainer);
+		}
 	}
 }
 

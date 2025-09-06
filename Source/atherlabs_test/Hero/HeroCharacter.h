@@ -18,7 +18,7 @@ public:
 	// Sets default values for this character's properties
 	AHeroCharacter(const FObjectInitializer& ObjectInitializer);
 
-	virtual void PossessedBy(AController* NewController) override;
+	// virtual void PossessedBy(AController* NewController) override;
 
 protected:
 	// Called when the game starts or when spawned
