@@ -69,7 +69,7 @@ void AHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 			if (UEnhancedInputLocalPlayerSubsystem* InputSubsystem = LocalPlayer->GetSubsystem<
 				UEnhancedInputLocalPlayerSubsystem>())
 			{
-				InputSubsystem->AddMappingContext(HeroData->HeroInputMappingContext, 1);
+				InputSubsystem->AddMappingContext(HeroData->HeroInputMappingContext, 0);
 			}
 		}
 	}
