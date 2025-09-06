@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HeroData.h"
 #include "InputAction.h"
 #include "InputMappingContext.h"
 #include "BaseLogic/Characters/BaseCharacter.h"
@@ -27,28 +28,16 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void ActivateAbilityByTag(const FInputActionValue& InputActionValue, const FGameplayTag GameplayTag);
+	
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 protected:
 	
 	// Input Actions for abilities
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<UInputAction> PrimaryAttackAction;
-    
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-	TObjectPtr<UInputAction> DodgeAction;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Hero|Data|Input")
+	TObjectPtr<UHeroData> HeroData;
 
-	// This will handle ability input
-	UPROPERTY(EditDefaultsOnly, Category = "Hero")
-	TObjectPtr<UInputMappingContext> HeroInputMappingContext;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Input")
-    TMap<TObjectPtr<UInputAction>, FGameplayTag> InputActionTags;
-
-	// Functions to handle input actions
-	void OnPrimaryAttackStarted(const FInputActionValue& Value);
-	void OnPrimaryAttackCompleted(const FInputActionValue& Value);
-	void OnDodgeStarted(const FInputActionValue& Value);
     
 };
