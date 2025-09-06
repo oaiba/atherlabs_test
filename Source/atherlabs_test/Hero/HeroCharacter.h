@@ -36,7 +36,7 @@ public:
 protected:
 	
 	// Input Actions for abilities
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Hero|Data|Input")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Data")
 	TObjectPtr<UHeroData> HeroData;
 
     

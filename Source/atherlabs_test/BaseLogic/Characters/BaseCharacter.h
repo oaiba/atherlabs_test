@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
+#include "BaseLogic/BaseData.h"
 #include "BaseLogic/AttributeSet/BaseCharAttributeSet.h"
 #include "BaseLogic/Components/BaseAbilitySystemComponent.h"
 #include "GameFramework/Character.h"
@@ -47,13 +48,16 @@ protected:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Abilities")
 	TObjectPtr<UBaseCharAttributeSet> AttributeSet;
 
-	// Default abilities to grant on spawn
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
-	TArray<TSubclassOf<UGameplayEffect>> DefaultGameplayEffects;
-
-	// Default abilities to grant on spawn
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
-	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
+	// // Default abilities to grant on spawn
+	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
+	// TArray<TSubclassOf<UGameplayEffect>> DefaultGameplayEffects;
+	//
+	// // Default abilities to grant on spawn
+	// UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Abilities")
+	// TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
+	//
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Data")
+	TObjectPtr<UBaseData> CharacterData;
 
 	// Handle to store abilities after being granted
 	TArray<FGameplayAbilitySpecHandle> DefaultAbilityHandles;

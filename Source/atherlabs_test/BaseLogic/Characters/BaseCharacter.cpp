@@ -21,13 +21,13 @@ void ABaseCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Init ASC owner/actor info
-	if (AbilitySystemComponent)
-	{
-		AbilitySystemComponent->InitAbilityActorInfo(this, this);
-	}
-
-	InitializeAbilities();
+	// // Init ASC owner/actor info
+	// if (AbilitySystemComponent)
+	// {
+	// 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	// }
+	//
+	// InitializeAbilities();
 }
 
 // Called every frame
@@ -44,10 +44,16 @@ void ABaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 
 void ABaseCharacter::InitializeAbilities()
 {
+	if (!IsValid(CharacterData))
+	{
+		UE_LOG(LogTemp, Error, TEXT("[%s::%hs] - CharacterData is not valid."), *GetName(), __FUNCTION__);
+		return;
+	}
+	
 	if (HasAuthority() && IsValid(AbilitySystemComponent))
 	{
 		// Grant any default abilities here
-		for (TSubclassOf<UGameplayAbility> AbilityClass : DefaultAbilities)
+		for (TSubclassOf<UGameplayAbility> AbilityClass : CharacterData->DefaultAbilities)
 		{
 			if (IsValid(AbilityClass))
 			{
@@ -57,7 +63,7 @@ void ABaseCharacter::InitializeAbilities()
 		}
 
 		// Apply default effects (e.g., permanent buffs)
-		for (TSubclassOf<UGameplayEffect> EffectClass : DefaultGameplayEffects)
+		for (TSubclassOf<UGameplayEffect> EffectClass : CharacterData->DefaultGameplayEffects)
 		{
 			if (IsValid(EffectClass))
 			{
